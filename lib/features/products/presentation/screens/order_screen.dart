@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_riverpod2/features/products/application/order_provider.dart';
 
@@ -9,25 +8,31 @@ class OrderScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final orderState = ref.watch(orderProvider);
+
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text('Buyurtmalar')),
+      appBar: AppBar(title: const Text('Orders'), centerTitle: true),
       body: orderState.when(
-        loading: () => Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(child: Text('Xatolik:: $error')),
+        loading: () => const Center(child: LinearProgressIndicator()),
+        error: (e, _) => Center(child: Text('Error: $e')),
         data:
             (orders) =>
                 orders.isEmpty
-                    ? Center(child: Text('Buyurtmalar y\'oq'))
+                    ? const Center(child: Text('No orders'))
                     : ListView.builder(
                       itemCount: orders.length,
-                      itemBuilder: (context, index) {
-                        final order = orders[index];
-                        return ListTile(
-                          title: Text(
-                            'Buyurtma #${index + 1} - \$${order.total.toStringAsFixed(2)}',
+                      itemBuilder: (ctx, i) {
+                        final order = orders[i];
+                        return Card(
+                          margin: const EdgeInsets.all(12),
+                          child: ListTile(
+                            title: Text(
+                              'Order: \$${order.total.toStringAsFixed(2)}',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(
+                              'Products: ${order.items.length}\n${order.date.toLocal()}',
+                            ),
                           ),
-                          subtitle: Text(order.date.toLocal().toString()),
-                          onTap: () {},
                         );
                       },
                     ),

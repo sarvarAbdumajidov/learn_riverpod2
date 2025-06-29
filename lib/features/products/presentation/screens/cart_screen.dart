@@ -14,7 +14,7 @@ class CartScreen extends ConsumerWidget {
     final total = cartItems.fold<double>(0, (sum, item) => sum + item.total);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Savat'), centerTitle: true),
+      appBar: AppBar(title: const Text('Cart'), centerTitle: true),
       body: Column(
         children: [
           Expanded(
@@ -47,7 +47,7 @@ class CartScreen extends ConsumerWidget {
             child: Column(
               children: [
                 Text(
-                  'Umumiy narx: \$${total.toStringAsFixed(2)}',
+                  'Total price: \$${total.toStringAsFixed(2)}',
                   style: const TextStyle(fontSize: 20),
                 ),
                 const SizedBox(height: 10),
@@ -60,9 +60,9 @@ class CartScreen extends ConsumerWidget {
                             cart.clearCart();
                             ScaffoldMessenger.of(
                               context,
-                            ).showSnackBar(const SnackBar(content: Text('Buyurtma berildi!')));
+                            ).showSnackBar(const SnackBar(content: Text('Order placed!')));
                           },
-                  child: const Text('Buyurtma berish'),
+                  child: const Text('Place an order'),
                 ),
               ],
             ),

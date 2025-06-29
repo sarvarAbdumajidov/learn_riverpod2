@@ -9,9 +9,9 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeProvider);
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text('Sozlamalar')),
+      appBar: AppBar(centerTitle: true, title: Text('Settings')),
       body: ListTile(
-        title: Text('Tungi holat'),
+        title: Text('Dark mode'),
         trailing: Switch(
           value: themeMode == ThemeMode.dark,
           onChanged: (isDark) {

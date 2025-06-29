@@ -15,6 +15,7 @@ class HomeScreen extends ConsumerWidget {
     final pages = const [ProductListScreen(), CartScreen(), OrderScreen(), SettingsScreen()];
 
     return Scaffold(
+
       body: IndexedStack(index: currentIndex, children: pages),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
@@ -22,10 +23,10 @@ class HomeScreen extends ConsumerWidget {
           ref.read(bottomNavProvider.notifier).state = index;
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Mahsulotlar'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Savat'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Buyurtmalar'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Sozlamalar'),
+          BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Products'),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Orders'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
         ],
       ),
     );

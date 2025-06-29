@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_riverpod2/features/products/application/cart_provider.dart';
@@ -13,7 +14,8 @@ class ProductListScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Shoply'),
+        title: Text('Shoply',style: TextStyle(color: Colors.white),),
+        backgroundColor: Colors.deepPurple,
 
         actions: [
           Consumer(
@@ -22,7 +24,7 @@ class ProductListScreen extends ConsumerWidget {
               return IconButton(
                 icon: Stack(
                   children: [
-                    Icon(Icons.shopping_cart),
+                    Icon(Icons.shopping_cart,color: Colors.white,),
                     if (count > 0)
                       Positioned(
                         right: 0,
@@ -54,7 +56,10 @@ class ProductListScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final product = products[index];
                 return ListTile(
-                  title: Text(product.name),
+
+                  selected: true,
+
+                  title: Text(product.name,style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500),),
                   subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
                   trailing: IconButton(
                     onPressed: () {
@@ -62,15 +67,15 @@ class ProductListScreen extends ConsumerWidget {
                       ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(
                         context,
-                      ).showSnackBar(SnackBar(content: Text('${product.name} savatga qo‘shildi')));
+                      ).showSnackBar(SnackBar(content: Text('${product.name} add to cart')));
                     },
-                    icon: Icon(Icons.add_shopping_cart),
+                    icon: Icon(Icons.add_shopping_cart),color: Colors.lightBlue,
                   ),
                 );
               },
             ),
         loading: () => Center(child: LinearProgressIndicator()),
-        error: (e, _) => Center(child: Text('Xatolik $e')),
+        error: (e, _) => Center(child: Text('Error $e')),
       ),
     );
   }
